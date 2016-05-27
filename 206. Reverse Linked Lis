@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null)
+            return head;
+        HashMap<Integer,ListNode> m = new HashMap<>();
+        m.put(0,head);
+        ListNode nd = head.next;
+        int count = 1;
+        while(nd!=null)
+        {
+            m.put(count++,nd);
+            nd = nd.next;
+        }
+        head = m.get(count-1);
+        ListNode g = head;
+        for(int i=count-2;i>=0;i--)
+        {
+            g.next = m.get(i);
+            g = g.next;
+        }
+        g.next = null;
+        return head;
+    }
+}
+用了hashmap，3ms
+
+=====================
+这种可以用递归啊！！！！
+public ListNode reverseList(ListNode head) {
+        if (head == null)  return null;
+        if (head.next == null) return head;
+        ListNode node = reverseList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return node;
+}
+1ms
