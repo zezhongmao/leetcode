@@ -1,0 +1,24 @@
+public class Solution {
+    public int majorityElement(int[] nums) {
+        Arrays.sort(nums);
+        int limit = (int)(nums.length/2.0);
+        int m=0,n=1,count;
+        while(m<nums.length&&n<nums.length)
+        {
+            count=1;
+            while(n<nums.length&&nums[m] == nums[n])
+            {
+                count++;
+                n++;
+            }
+            if(count>limit)
+                break;
+            else
+            {
+                m = n;
+                n++;
+            }
+        }
+        return nums[m];
+    }
+}
