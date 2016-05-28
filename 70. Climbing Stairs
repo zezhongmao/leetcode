@@ -1,0 +1,24 @@
+public class Solution {
+    public int climbStairs(int n) {
+        if(n<=3)
+            return n;
+        int res=0,x=2,y=3;
+        for(int i=4;i<=n;i++)
+        {
+            res = (x+y);
+            x = y;
+            y = res;
+        }
+        return res;
+    }
+}
+0ms
+==========================
+第一次做的时候用递归，超时了
+public class Solution {
+    public int climbStairs(int n) {
+        if(n<=3)
+            return n;
+    return climbStairs(n-1)+climbStairs(n-2);   
+  }
+}
