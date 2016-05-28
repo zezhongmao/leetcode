@@ -1,0 +1,31 @@
+public class Solution {
+    public boolean isPowerOfTwo(int n) {
+        return n>0 && Math.pow(2,(int)(Math.log(Integer.MAX_VALUE)/Math.log(2.0)))%n==0;
+    }
+}
+3ms
+======================================
+public class Solution {
+    public boolean isPowerOfTwo(int n) {
+        int count=0;
+        double flag;
+        do{
+           flag = Math.pow(2,count++);
+        }while(flag<(double)n);
+        if(flag==(double)n)
+            return true;
+        else
+            return false;
+    }
+}
+5ms
+=======================================
+public class Solution {
+ public boolean isPowerOfTwo(int n) {
+        if(n < 1) return false;
+        return (0 == ((n - 1) & n));
+    }
+}
+2ms
+
+Example n=8,bin(8)=1000,bin(8-1)=0111,and 1000&0111=0,also,power of two always like 1,10,100,1000,10000...and so on.  so this way is an awsome way.
