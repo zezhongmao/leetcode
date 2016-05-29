@@ -1,0 +1,53 @@
+public class Solution {
+    public int trap(int[] height) {
+        int i=0,j,m;
+        int res = 0;
+        while(i<height.length)
+        {
+            j = higher(height,i);
+            if(j==-1)
+            {
+                m = i;
+                i = nexthigh(height,i);
+                if(i==-1)
+                    break;
+                res += height[i]*(i-m-1);
+                for(int n=m+1;n<i;n++)
+                    res -= height[n];
+                continue;
+            }
+            res += (j-i-1)*Math.min(height[j],height[i]);
+            for(int temp=i+1;temp<j;temp++)
+                res -= height[temp];
+            i = j;
+        }
+        return res;
+    }
+    
+    public int higher(int[] height,int i)
+    {
+        int flag = height[i];
+        for(int j=i+1;j<height.length;j++)
+        {
+            if(height[j]>=flag)
+                return j;
+        }
+        return -1;        
+    }
+    
+    public int nexthigh(int[] height,int i)
+    {
+        int res = i+1;
+        if(res==height.length)
+            return -1;
+        for(int j=i+1;j<height.length;j++)
+        {
+            if(height[j]>height[res])
+                res = j;
+        }
+        return res;
+    }
+}
+2ms
+
+基本思路：高柱子和高柱子之间夹击，之后在剩下的数组值中找最高夹击
