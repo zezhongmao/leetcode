@@ -1,0 +1,41 @@
+public class Solution {
+    public int findMin(int[] nums) {
+        int i=0,j=nums.length-1;
+        if(i==j)
+            return nums[i];
+        if(nums[i]<nums[j])
+            return nums[i];
+        else
+        {
+            do
+            {
+                j--;
+            }while(nums[i]>nums[j]);
+        }
+        return nums[j+1];
+    }
+}
+1ms
+======================
+当然最简单的是sort一下，然后取第一个数，但是时间感人。。
+======================
+binary search
+还是1ms
+public class Solution {
+    public int findMin(int[] nums) {
+        int left=0,right=nums.length-1;
+        if(nums[left]<=nums[right])
+            return nums[left];
+        while(left>=0&&right<=nums.length-1&&(right-left)>=0)
+        {
+            int mid = left+(right-left)/2;
+            if(right-left==1)   
+                return Math.min(nums[left],nums[right]);
+            if(nums[left]<nums[mid])
+                left = mid;
+            else 
+                right = mid;
+        }
+        return 0;
+    }
+}
